@@ -28,7 +28,7 @@ const User = require('../models/user');
 const reqAuth = require('../config/safeRoutes').reqAuth;
 const shell = require('shelljs')
 const Tail = require('tail').Tail;
-
+const dockerAPI = require('./docker-api');
 
 function ToTrimmer(list){
   const word = list.replace(" ", "")
@@ -177,6 +177,18 @@ router.post('/stop', (req, res) => {
   res.send("success")
 })
 
+router.post('/start', (req, res) => {
+  const ContainerName = req.body.version;
+  shell.exec('docker start '+ ContainerName);
+  res.send("success")
+})
+
+router.post('/uninstall', (req, res) => {
+  const ContainerName = req.body.version;
+  shell.exec('docker rm '+ ContainerName);
+  res.send("success")
+})
+
 router.post('/run', (req, res) => {
   const RunContainerName = req.body.version;
   console.log('docker start ' + RunContainerName);
@@ -186,5 +198,13 @@ router.post('/run', (req, res) => {
   res.send("success")
 })
 
-
+router.get('/containers', async (req, res) => {
+  try {
+    const { runningContainers, stoppedContainers } = await dockerAPI.getContainerNames();
+    console.log(runningContainers)
+    res.json({ runningContainers, stoppedContainers });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch container names' });
+  }
+});
 module.exports = router;
