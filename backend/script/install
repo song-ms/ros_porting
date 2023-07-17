@@ -1,0 +1,19 @@
+#!/bin/bash
+source ./my_password
+
+# <!-- printf drcf/moma:%s\\n $1 -->
+
+echo $rootPw | sudo --stdin apt-get update
+# sudo apt-get install -y docker-ce
+# sudo docker login -u $Usern -p $Pwd
+# sudo xhost +local
+# printf "install completed!"
+# Linux post-install
+# sudo groupadd docker
+# sudo usermod -aG docker $USER
+# sudo systemctl enable docker
+sudo docker pull drcf/noetic:$1 &&
+sudo docker run -dit --name $1 --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --env="XAUTHORITY=$XAUTH" --volume="$XAUTH:$XAUTH" --net=host --privileged drcf/noetic:$1  &&
+sudo docker stop $1 &&
+echo "install completed!"
+# sudo docker run -dit --name moma$1 --network="host" --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" drcf/moma:$1

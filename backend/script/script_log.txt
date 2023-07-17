@@ -1,0 +1,4 @@
+camera: Pulling from drcf/noetic
+Digest: sha256:3ae658844e0164206092bdcd3c68f3d7e168be6e53a21d926107c08722923de1
+Status: Image is up to date for drcf/noetic:camera
+docker.io/drcf/noetic:camera

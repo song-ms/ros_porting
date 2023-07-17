@@ -1,0 +1,32 @@
+#!/bin/bash
+source ./my_password
+
+# <!-- printf drcf/moma:%s\\n $1 -->
+
+# echo $rootPw | sudo --stdin apt-get update
+# sudo apt-get install -y docker-ce
+# sudo docker login -u $Usern -p $Pwd
+# sudo xhost +
+
+# Linux post-install
+# sudo docker container ls -a --format 'table {{.ID}}\t{{.Names}}'
+# sudo docker image list --format='{{json .}}' | jq -r '.Tag'
+
+# all docker container list
+ContainerList=$(echo $rootPw | sudo docker ps -a --format json | jq -r '.Names')
+# ContainerList=$(echo $rootPw | sudo docker ps -a --format="{{json .Names}}")
+
+printf %s\\n ${ContainerList} | printf %s "$(cat)"|jq -R -s 'split("\n")'
+
+# running docker container list (w/ name)
+# echo $rootPw | sudo docker ps --format='{{json .Names}}' | jq -r 
+
+
+# sudo groupadd docker
+# sudo usermod -aG docker $USER
+# sudo systemctl enable docker
+# sudo docker pull drcf/moma:$1 > ./script_log.txt &
+
+# sudo docker ps
+# sudo docker images 
+# sudo docker run -dit --name moma$1 --network="host" --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" drcf/moma:$1

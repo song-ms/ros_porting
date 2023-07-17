@@ -1,0 +1,15 @@
+#!/bin/bash
+
+sudo docker stop $1
+# echo hello
+
+# Linux post-install
+
+# sudo groupadd docker
+# sudo usermod -aG docker $USER
+# sudo systemctl enable docker
+# sudo docker pull drcf/moma:$1 > ./script_log.txt &
+
+# sudo docker ps
+# sudo docker images 
+# sudo docker run -dit --name moma$1 --network="host" --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" drcf/moma:$1

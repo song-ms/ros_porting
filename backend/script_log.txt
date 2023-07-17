@@ -1,0 +1,4 @@
+0.2.3: Pulling from drcf/moma
+Digest: sha256:963fbccb44fd8eb49904ed212babf93f83b5512ff29649763b636c2398e8f598
+Status: Image is up to date for drcf/moma:0.2.3
+docker.io/drcf/moma:0.2.3

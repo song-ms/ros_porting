@@ -1,0 +1,7 @@
+#!/bin/bash
+source ./my_password
+
+# All docker container list
+ContainerList=$(echo $rootPw | sudo docker ps -a --format json | jq -r '.Names')
+printf %s\\n ${ContainerList} | printf %s "$(cat)"|jq -R -s 'split("\n")'
+
